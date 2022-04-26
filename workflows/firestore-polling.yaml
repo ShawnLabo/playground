@@ -14,15 +14,18 @@
             name: ${"projects/" + project_id + "/databases/(default)/documents/" + collection + "/" + document}
           result: status_doc
       - log_status:
+          # https://cloud.google.com/workflows/docs/reference/stdlib/sys/log
           call: sys.log
           args:
             text: '${"Current status: " + status_doc.fields.status.stringValue}'
             severity: INFO
       - check_if_approved:
+          # https://cloud.google.com/workflows/docs/reference/syntax/conditions
           switch:
             - condition: ${status_doc.fields.status.stringValue == approval_status}
               next: return
       - wait:
+          # https://cloud.google.com/workflows/docs/reference/stdlib/sys/log
           call: sys.sleep
           args:
             seconds: 5

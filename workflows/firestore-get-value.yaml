@@ -5,6 +5,7 @@
       - collection: "my-collection"
       - document: "my-document"
 - get_status:
+    # https://cloud.google.com/workflows/docs/reference/googleapis/firestore/Overview
     call: googleapis.firestore.v1.projects.databases.documents.get
     args:
       name: ${"projects/" + project_id + "/databases/(default)/documents/" + collection + "/" + document}

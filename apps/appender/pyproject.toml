@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "appender"
+version = "0.1.0"
+description = ""
+authors = ["nownabe <nownabe@users.noreply.github.com>"]
+license = "apache"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Flask = "^2.1.1"
+gunicorn = "^20.1.0"
+waitress = "^2.1.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

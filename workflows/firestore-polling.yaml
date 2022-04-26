@@ -1,0 +1,32 @@
+- init:
+    assign:
+      # https://cloud.google.com/workflows/docs/reference/stdlib/sys/get_env
+      - project_id: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+      - collection: "my-collection"
+      - document: "my-document"
+      - approval_status: "APPROVED"
+
+- wait_for_approval:
+    steps:
+      - get_status:
+          call: googleapis.firestore.v1.projects.databases.documents.get
+          args:
+            name: ${"projects/" + project_id + "/databases/(default)/documents/" + collection + "/" + document}
+          result: status_doc
+      - log_status:
+          call: sys.log
+          args:
+            text: '${"Current status: " + status_doc.fields.status.stringValue}'
+            severity: INFO
+      - check_if_approved:
+          switch:
+            - condition: ${status_doc.fields.status.stringValue == approval_status}
+              next: return
+      - wait:
+          call: sys.sleep
+          args:
+            seconds: 5
+          next: get_status
+
+- return:
+    return: "Workflow completed with approval"

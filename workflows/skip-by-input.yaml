@@ -1,0 +1,27 @@
+main:
+  params: [args]
+  steps:
+    - log_args:
+        call: sys.log
+        args:
+          data: ${args}
+    - skip:
+        switch:
+          - condition: ${args.skip == 1}
+            next: second_step
+          - condition: ${args.skip == 2}
+            next: third_step
+    - first_step:
+        call: sys.log
+        args:
+          text: "First step"
+    - second_step:
+        call: sys.log
+        args:
+          text: "Second step"
+    - third_step:
+        call: sys.log
+        args:
+          text: "Third step"
+    - return:
+        return: "Workflow completed"

@@ -12,5 +12,3 @@
     result: status_doc
 - return:
     return: ${status_doc.fields.status.stringValue}
-
-

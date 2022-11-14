@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "clearblade"
+version = "0.1.0"
+description = ""
+authors = ["nownabe <nownabe@users.noreply.github.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+paho-mqtt = "^1.6.1"
+PyJWT = {extras = ["crypto"], version = "^2.6.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
